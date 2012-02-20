@@ -2,13 +2,9 @@ require 'rake/clean'
 
 # prject variables
 DOT_NET_PATH = "#{ENV["SystemRoot"]}\\Microsoft.NET\\Framework\\v4.0.30319"
-XUNIT_EXE = "xunit.console.clr4.exe"
+XUNIT_EXE = "src/packages/xunit.runners.1.9.0.1566/tools/xunit.console.clr4.exe"
 SOURCE_PATH = "src"
-OUTPUT_PATH = "output"
 CONFIG = "Release"
-DEPLOY_PATH = "./archive"
- 
-CLEAN.include(OUTPUT_PATH)
 
 # Tasks
 task :default => [:nuget, :compile, :unit_test]

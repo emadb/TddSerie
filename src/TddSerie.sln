@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodicePlastico.TddSerie.Core", "CodicePlastico.TddSerie.Core\CodicePlastico.TddSerie.Core.csproj", "{5099F795-2CF2-4A12-8478-14D43CE9D820}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodicePlastico.TddSerie.Core.Tests", "CodicePlastico.TddSerie.Core.Tests\CodicePlastico.TddSerie.Core.Tests.csproj", "{EAA2C252-A048-4029-8596-F002D2C6D19E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{5099F795-2CF2-4A12-8478-14D43CE9D820}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5099F795-2CF2-4A12-8478-14D43CE9D820}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5099F795-2CF2-4A12-8478-14D43CE9D820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA2C252-A048-4029-8596-F002D2C6D19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA2C252-A048-4029-8596-F002D2C6D19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA2C252-A048-4029-8596-F002D2C6D19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA2C252-A048-4029-8596-F002D2C6D19E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
