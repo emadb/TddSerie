@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodicePlastico.TddSerie.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodicePlastico.TddSerie.Core.Tests", "CodicePlastico.TddSerie.Core.Tests\CodicePlastico.TddSerie.Core.Tests.csproj", "{EAA2C252-A048-4029-8596-F002D2C6D19E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7FD988A7-0F03-494E-B3B2-5F474525A978}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EAA2C252-A048-4029-8596-F002D2C6D19E} = {7FD988A7-0F03-494E-B3B2-5F474525A978}
 	EndGlobalSection
 EndGlobal
