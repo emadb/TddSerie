@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CodicePlastico.TddSerie.Core
 {
@@ -16,7 +17,8 @@ namespace CodicePlastico.TddSerie.Core
 
         public void AddItem(int itemId)
         {
-            _items.Add(itemId);
+            if (!_items.Contains(itemId))
+                _items.Add(itemId);
         }
     }
 }
