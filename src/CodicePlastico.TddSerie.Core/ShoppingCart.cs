@@ -1,24 +1,37 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace CodicePlastico.TddSerie.Core
 {
     public class ShoppingCart
     {
-        private readonly List<int> _items;
+        private readonly List<CartItem> _items;
 
         public ShoppingCart()
         {
-            _items = new List<int>();
+            _items = new List<CartItem>();
+        }
+
+        public IEnumerable<CartItem> Items
+        {
+            get { return new ReadOnlyCollection<CartItem>(_items); }
         }
 
         public int ItemCount { get { return _items.Count; } }
 
-        public void AddItem(int itemId)
+        public void AddItem(CartItem item)
         {
-            if (!_items.Contains(itemId))
-                _items.Add(itemId);
+            if (_items.Contains(item))
+            {
+                _items.Single(i => i.Id == item.Id).Quantity++;
+            }
+            else
+            {
+                item.Quantity = 1;
+                _items.Add(item);
+            }
         }
     }
 }
