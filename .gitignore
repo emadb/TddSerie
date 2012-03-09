@@ -18,3 +18,4 @@ _ReSharper.*
 TestResult.xml
 publish/
 support/
+src/TestResults/

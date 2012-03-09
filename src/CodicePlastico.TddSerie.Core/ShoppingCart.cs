@@ -21,14 +21,16 @@ namespace CodicePlastico.TddSerie.Core
 
         public int ItemCount { get { return _items.Count; } }
 
-        public void AddItem(CartItem item)
+        public void AddItem(int itemId)
         {
-            if (_items.Contains(item))
+            CartItem item = _items.SingleOrDefault(i => i.Id == itemId);
+            if (item != null)
             {
-                _items.Single(i => i.Id == item.Id).Quantity++;
+                item.Quantity++;
             }
             else
             {
+                item = new CartItem(itemId);
                 item.Quantity = 1;
                 _items.Add(item);
             }
