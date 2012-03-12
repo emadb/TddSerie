@@ -26,13 +26,11 @@ namespace CodicePlastico.TddSerie.Core
             CartItem item = _items.SingleOrDefault(i => i.Id == itemId);
             if (item != null)
             {
-                item.Quantity++;
+                item.AddOne();
             }
             else
             {
-                item = new CartItem(itemId);
-                item.Quantity = 1;
-                _items.Add(item);
+                _items.Add(new CartItem(itemId));
             }
         }
     }
