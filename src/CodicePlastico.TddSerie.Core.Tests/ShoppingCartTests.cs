@@ -9,7 +9,9 @@ namespace CodicePlastico.TddSerie.Core.Tests
         [Fact]
         public void AddItem_TheItemIsNotYetInTheBasket_ShouldAddItToTheBasket()
         {
-            var cart = new ShoppingCart();
+            var priceListService = new Mock<IPriceListService>();
+            var cart = new ShoppingCart(priceListService.Object);
+
             cart.AddItem(99);
 
             Assert.Equal(1, cart.ItemCount);
@@ -18,7 +20,8 @@ namespace CodicePlastico.TddSerie.Core.Tests
         [Fact]
         public void AddSameItemTwice_TheItemCountShouldBe1()
         {
-            var cart = new ShoppingCart();
+            var priceListService = new Mock<IPriceListService>();
+            var cart = new ShoppingCart(priceListService.Object);
 
             cart.AddItem(99);
             cart.AddItem(99);
@@ -29,7 +32,9 @@ namespace CodicePlastico.TddSerie.Core.Tests
         [Fact]
         public void AddSameItemTwice_TheItemQuantityShouldBe2()
         {
-            var cart = new ShoppingCart();
+            var priceListService = new Mock<IPriceListService>();
+            var cart = new ShoppingCart(priceListService.Object);
+
             cart.AddItem(99);
             cart.AddItem(99);
 
@@ -39,7 +44,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
 		[Fact]
         public void GetTotal_OneItem_ShouldAskToPriceListServiceTheItemPrice()
         {
-			Moq<IPriceListService> priceListService = new Moq<IPriceListService>();
+			var priceListService = new Mock<IPriceListService>();
             var cart = new ShoppingCart(priceListService.Object);
             
 			cart.AddItem(99);
@@ -50,7 +55,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
 		[Fact]
         public void GetTotal_TwoDifferentItems_ShouldReturnTheSum()
         {
-			Moq<IPriceListService> priceListService = new Moq<IPriceListService>();
+			var priceListService = new Mock<IPriceListService>();
 			priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
 			priceListService.Setup(p => p.GetCurrentPriceFor(98)).Returns(50m);
             
@@ -59,7 +64,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
 			cart.AddItem(99);
 			cart.AddItem(98);
             
-			Assert.True(150m, cart.Total);
+			Assert.Equal(150m, cart.Total);
         }
     }
 }

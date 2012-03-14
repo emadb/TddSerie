@@ -7,10 +7,12 @@ namespace CodicePlastico.TddSerie.Core
 {
     public class ShoppingCart
     {
+        private readonly IPriceListService _priceListService;
         private readonly List<CartItem> _items;
 
-        public ShoppingCart()
+        public ShoppingCart(IPriceListService priceListService)
         {
+            _priceListService = priceListService;
             _items = new List<CartItem>();
         }
 
@@ -20,6 +22,8 @@ namespace CodicePlastico.TddSerie.Core
         }
 
         public int ItemCount { get { return _items.Count; } }
+
+        public decimal Total { get; private set; }
 
         public void AddItem(int itemId)
         {
@@ -32,6 +36,7 @@ namespace CodicePlastico.TddSerie.Core
             {
                 _items.Add(new CartItem(itemId));
             }
+            Total += _priceListService.GetCurrentPriceFor(itemId);
         }
     }
 }
