@@ -80,5 +80,17 @@ namespace CodicePlastico.TddSerie.Core.Tests
 
             Assert.Equal(200m, _cart.Total);
         }
+
+        [Fact]
+        public void ApplyCoupon_TotalPriceShouldBeDiscointedOf10Percent()
+        {
+            _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(150m);
+            _priceListService.Setup(p => p.GetDiscountFor("SCONTO10")).Returns(0.10m);
+            _cart.AddItem(99);
+            
+            _cart.ApplyCoupon("SCONTO10");
+
+            Assert.Equal(135m, _cart.Total);
+        }
     }
 }

@@ -3,5 +3,6 @@
     public interface IPriceListService
     {
         decimal GetCurrentPriceFor(int itemId);
+        decimal GetDiscountFor(string coupon);
     }
 }

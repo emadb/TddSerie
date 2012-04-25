@@ -35,7 +35,13 @@ namespace CodicePlastico.TddSerie.Core
             {
                 _items.Add(new CartItem(itemId));
             }
-            //Total += _priceListService.GetCurrentPriceFor(itemId);
+            Total += _priceListService.GetCurrentPriceFor(itemId);
+        }
+
+        public void ApplyCoupon(string coupon)
+        {
+            var discount = _priceListService.GetDiscountFor(coupon);
+            Total -= Total * discount;
         }
     }
 }
