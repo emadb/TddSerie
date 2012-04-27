@@ -40,12 +40,12 @@ namespace CodicePlastico.TddSerie.Core.Tests
 
             Assert.Equal(2, _cart.Items.ElementAt(0).Quantity);
         }
-		
-		[Fact]
+
+        [Fact]
         public void GetTotal_OneItem_ShouldAskToPriceListServiceTheItemPrice()
         {
-			_cart.AddItem(99);
-			_priceListService.Verify(p => p.GetCurrentPriceFor(99));
+            _cart.AddItem(99);
+            _priceListService.Verify(p => p.GetCurrentPriceFor(99));
         }
 
         [Fact]
@@ -56,25 +56,25 @@ namespace CodicePlastico.TddSerie.Core.Tests
 
             Assert.Equal(100m, _cart.Total);
         }
-		
 
-		[Fact]
+
+        [Fact]
         public void GetTotal_TwoDifferentItems_ShouldReturnTheSum()
         {
-			_priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
-			_priceListService.Setup(p => p.GetCurrentPriceFor(98)).Returns(50m);
-            
-			_cart.AddItem(99);
-			_cart.AddItem(98);
-            
-			Assert.Equal(150m, _cart.Total);
+            _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
+            _priceListService.Setup(p => p.GetCurrentPriceFor(98)).Returns(50m);
+
+            _cart.AddItem(99);
+            _cart.AddItem(98);
+
+            Assert.Equal(150m, _cart.Total);
         }
 
         [Fact]
         public void GetTotal_SameItemTwice_ShouldReturnTheSum()
         {
             _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
-            
+
             _cart.AddItem(99);
             _cart.AddItem(99);
 
@@ -82,15 +82,50 @@ namespace CodicePlastico.TddSerie.Core.Tests
         }
 
         [Fact]
+
         public void ApplyCoupon_TotalPriceShouldBeDiscointedOf10Percent()
         {
             _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(150m);
             _priceListService.Setup(p => p.GetDiscountFor("SCONTO10")).Returns(0.10m);
             _cart.AddItem(99);
-            
+
             _cart.ApplyCoupon("SCONTO10");
 
             Assert.Equal(135m, _cart.Total);
+        }
+        
+        [Fact]
+        public void RemoveItem_OneItemInCart_ItemCountShouldBeZero()
+        {
+            _cart.AddItem(99);
+
+            _cart.RemoveItem(99);
+
+            Assert.Equal(0, _cart.ItemCount);
+        }
+
+        [Fact]
+        public void RemoveItem_OneItemInCart_PriceShouldBeZero()
+        {
+            _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
+            _cart.AddItem(99);
+
+            _cart.RemoveItem(99);
+
+            Assert.Equal(0, _cart.Total);
+        }
+
+        [Fact]
+        public void RemoveItem_TwoEqualsItemInCart_CountShouldBe1()
+        {
+            _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
+            _cart.AddItem(99);
+            _cart.AddItem(99);
+
+            _cart.RemoveItem(99);
+
+            Assert.Equal(1, _cart.ItemCount);
+
         }
     }
 }

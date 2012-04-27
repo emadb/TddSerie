@@ -27,21 +27,35 @@ namespace CodicePlastico.TddSerie.Core
         public void AddItem(int itemId)
         {
             CartItem item = _items.SingleOrDefault(i => i.Id == itemId);
+            var unitPrice = _priceListService.GetCurrentPriceFor(itemId);
             if (item != null)
             {
                 item.AddOne();
             }
             else
-            {
-                _items.Add(new CartItem(itemId));
+            {'
+            '   _items.Add(new CartItem(itemId, unitPrice));
             }
-            Total += _priceListService.GetCurrentPriceFor(itemId);
+            Total += unitPrice;
         }
 
         public void ApplyCoupon(string coupon)
         {
             var discount = _priceListService.GetDiscountFor(coupon);
             Total -= Total * discount;
+        }
+
+        public void RemoveItem(int itemId)
+        {
+            var cartItem = _items.Single(i => i.Id == itemId);
+            if (cartItem.Quantity == 1)
+                _items.Remove(cartItem);
+            else
+            {
+                cartItem.RemoveOne();
+            }
+            Total -= cartItem.UnitPrice;
+            
         }
     }
 }
