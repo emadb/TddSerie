@@ -26,15 +26,15 @@ namespace CodicePlastico.TddSerie.Core
 
         public void AddItem(int itemId)
         {
-            CartItem item = _items.SingleOrDefault(i => i.Id == itemId);
+            var item = _items.SingleOrDefault(i => i.Id == itemId);
             var unitPrice = _priceListService.GetCurrentPriceFor(itemId);
             if (item != null)
             {
                 item.AddOne();
             }
             else
-            {'
-            '   _items.Add(new CartItem(itemId, unitPrice));
+            {
+               _items.Add(new CartItem(itemId, unitPrice));
             }
             Total += unitPrice;
         }
@@ -45,15 +45,19 @@ namespace CodicePlastico.TddSerie.Core
             Total -= Total * discount;
         }
 
-        public void RemoveItem(int itemId)
+        public void RemoveOneItem(int itemId)
         {
             var cartItem = _items.Single(i => i.Id == itemId);
+            
             if (cartItem.Quantity == 1)
+            {
                 _items.Remove(cartItem);
+            }
             else
             {
                 cartItem.RemoveOne();
             }
+            
             Total -= cartItem.UnitPrice;
             
         }

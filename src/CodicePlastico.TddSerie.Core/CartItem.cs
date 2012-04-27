@@ -19,5 +19,10 @@ namespace CodicePlastico.TddSerie.Core
         {
             Quantity++;
         }
+
+        public void RemoveOne()
+        {
+            Quantity--;
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
         {
             _cart.AddItem(99);
 
-            _cart.RemoveItem(99);
+            _cart.RemoveOneItem(99);
 
             Assert.Equal(0, _cart.ItemCount);
         }
@@ -110,7 +110,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
             _priceListService.Setup(p => p.GetCurrentPriceFor(99)).Returns(100m);
             _cart.AddItem(99);
 
-            _cart.RemoveItem(99);
+            _cart.RemoveOneItem(99);
 
             Assert.Equal(0, _cart.Total);
         }
@@ -122,7 +122,7 @@ namespace CodicePlastico.TddSerie.Core.Tests
             _cart.AddItem(99);
             _cart.AddItem(99);
 
-            _cart.RemoveItem(99);
+            _cart.RemoveOneItem(99);
 
             Assert.Equal(1, _cart.ItemCount);
 
