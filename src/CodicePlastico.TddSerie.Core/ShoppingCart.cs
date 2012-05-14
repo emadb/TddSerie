@@ -18,7 +18,9 @@ namespace CodicePlastico.TddSerie.Core
         public int ItemCount { get { return _items.Count; } }
         public decimal Total { get; private set; }
 
-        public ShoppingCart(IPriceListService priceListService)
+        public decimal ShipmentCost { get; private set; }
+
+        public ShoppingCart(IPriceListService priceListService, IShippingService shippingService)
         {
             _priceListService = priceListService;
             _items = new List<CartItem>();
@@ -60,6 +62,10 @@ namespace CodicePlastico.TddSerie.Core
             
             Total -= cartItem.UnitPrice;
             
+        }
+
+        public void SetShipAddress(string address, string city, string zipCode, string country)
+        {
         }
     }
 }

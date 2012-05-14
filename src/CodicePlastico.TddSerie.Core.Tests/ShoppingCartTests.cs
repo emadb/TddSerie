@@ -7,12 +7,14 @@ namespace CodicePlastico.TddSerie.Core.Tests
     public class ShoppingCartTests
     {
         private Mock<IPriceListService> _priceListService;
+        private Mock<IShippingService> _shippingService;
         private ShoppingCart _cart;
 
         public ShoppingCartTests()
         {
             _priceListService = new Mock<IPriceListService>();
-            _cart = new ShoppingCart(_priceListService.Object);
+            _shippingService = new Mock<IShippingService>();
+            _cart = new ShoppingCart(_priceListService.Object, _shippingService.Object);
         }
 
         [Fact]
@@ -125,7 +127,20 @@ namespace CodicePlastico.TddSerie.Core.Tests
             _cart.RemoveOneItem(99);
 
             Assert.Equal(1, _cart.ItemCount);
+        }
 
+        [Fact]
+        public void SetShipAddress_ShouldSetShipmentCosts()
+        {
+            _cart.SetShipAddress("5541 Sunset Boulevard","Hollywood", "90028", "USA");
+            Assert.True(_cart.ShipmentCost >= 0);
+        }
+
+        [Fact]
+        public void SetShipAddress_ShouldGetShippingCostsFromTheService()
+        {
+            _cart.SetShipAddress("5541 Sunset Boulevard", "Hollywood", "90028", "USA");
+            _shippingService.Verify(s => s.GetCostsFor("5541 Sunset Boulevard", "Hollywood", "90028", "USA"));
         }
     }
 }
